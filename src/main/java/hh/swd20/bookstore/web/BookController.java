@@ -1,15 +1,11 @@
 package hh.swd20.bookstore.web;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-
 import hh.swd20.bookstore.domain.Book;
 import hh.swd20.bookstore.domain.BookRepository;
 
@@ -46,16 +42,9 @@ public class BookController {
         return "redirect:../booklist";
     }
     
-  
-    // @GetMapping("/editbook"/{id}")
-    // public String editBookTemplate(@PathVariable("id") Long id, Model
-    // Book book = repository.findById(id).get();
-    //a) model.addAttribute("book", book)
-    //b) model.addAttribute("book", repository.findById(id));
-    // return "editbook";
-    
-    // tallentaminen
-    // @PutMapping("editboot/edit")
-    // public String editBook("ModelAttribute Book
-    // repository.save(book);
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editBook(@PathVariable("id") Long bookId, Model model) {
+    	model.addAttribute("book", repository.findById(bookId));
+        return "editbook";
+    }
 }
